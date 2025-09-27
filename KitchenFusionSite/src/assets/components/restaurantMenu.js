@@ -919,13 +919,13 @@ export const RESTAURANT_MENU = [
 
 
 
-for (let i = 0; i < RESTAURANT_MENU.length; i++) {
-  // RESTAURANT_MENU[i]["items"].forEach(e=>console.log(e[0].split(" ").join("-")));
-  // RESTAURANT_MENU[i]["items"].forEach(e=>console.log(typeof e[1] === "string" || typeof e[1] ==="number"));
-  RESTAURANT_MENU[i]["items"].forEach(e=>{
-    let color = e[2]=="v" ? 'green' : 'red';
-    console.log(color);
-  });
-  // console.log(Boolean(RESTAURANT_MENU[i]['note']));
+// for (let i = 0; i < RESTAURANT_MENU.length; i++) {
+//   // RESTAURANT_MENU[i]["items"].forEach(e=>console.log(e[0].split(" ").join("-")));
+//   // RESTAURANT_MENU[i]["items"].forEach(e=>console.log(typeof e[1] === "string" || typeof e[1] ==="number"));
+//   // RESTAURANT_MENU[i]["items"].forEach(e=>{
+//   //   let color = e[2]=="v" ? 'green' : 'red';
+//   //   console.log(color);
+//   // });
+//   // console.log(Boolean(RESTAURANT_MENU[i]['note']));
   
-}
+// }
