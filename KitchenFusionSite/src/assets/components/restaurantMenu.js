@@ -424,7 +424,7 @@ export const RESTAURANT_MENU = [
       [
         "cheese masala maggi",
         109,
-        "n",
+        "v",
         ""
       ],
       [
