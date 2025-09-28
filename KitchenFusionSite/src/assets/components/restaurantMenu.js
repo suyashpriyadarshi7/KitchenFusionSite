@@ -192,25 +192,25 @@ export const RESTAURANT_MENU = [
     "items": [
       [
         "exotic vegetable salad",
-        "99",
+        99,
         "v",
         ""
       ],
       [
         "egg salad",
-        "99",
+        99,
         "n",
         ""
       ],
       [
         "egg & mayo salad",
-        "99",
+        99,
         "n",
         ""
       ],
       [
         "chicken salad",
-        "99",
+        99,
         "n",
         ""
       ]
@@ -919,13 +919,14 @@ export const RESTAURANT_MENU = [
 
 
 
-// for (let i = 0; i < RESTAURANT_MENU.length; i++) {
-//   // RESTAURANT_MENU[i]["items"].forEach(e=>console.log(e[0].split(" ").join("-")));
-//   // RESTAURANT_MENU[i]["items"].forEach(e=>console.log(typeof e[1] === "string" || typeof e[1] ==="number"));
-//   // RESTAURANT_MENU[i]["items"].forEach(e=>{
-//   //   let color = e[2]=="v" ? 'green' : 'red';
-//   //   console.log(color);
-//   // });
-//   // console.log(Boolean(RESTAURANT_MENU[i]['note']));
+for (let i = 0; i < RESTAURANT_MENU.length; i++) {
+  // RESTAURANT_MENU[i]["items"].forEach(e=>console.log(e[0].split(" ").join("-")));
+  // RESTAURANT_MENU[i]["items"].forEach(e=>console.log(typeof e[1] === "string" || typeof e[1] ==="number"));
+  // RESTAURANT_MENU[i]["items"].forEach(e=>{
+  //   let color = e[2]=="v" ? 'green' : 'red';
+  //   console.log(color);
+  // });
+  // console.log(Boolean(RESTAURANT_MENU[i]['note']));
+  console.log(typeof RESTAURANT_MENU[i]["items"][1][1])
   
-// }
+}

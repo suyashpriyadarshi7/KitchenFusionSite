@@ -64,6 +64,31 @@ function ProductCategoryRow({props}) {
     // }
   }
 
+  let tableHeading;
+  if (typeof props["items"][1][1] == "number") {
+    tableHeading = (<tr><th className='tableheading'>Items</th><th className='tableheading'>Price</th></tr>)
+  } else if (typeof props["items"][1][1] == "object") {
+    let keys = Object.keys(props["items"][1][1]);
+    let b = [];
+    for (let i = 0; i < keys.length; i++) {
+      b.push(<th className='tableheading' key={keys[i]}>{toTitleCase(keys[i])}</th>)
+    }
+    tableHeading = (
+      <>
+      <tr>
+        <th className='tableheading' rowSpan={2}>Items</th>
+        <th className='tableheading' colSpan={3} style={{textAlign: 'center'}}>Price</th>
+      </tr>
+        
+        {b}
+      <tr>
+
+      </tr>
+      </>
+    );
+    
+  }
+
   return (
     
     // <tr className='categoryrow'>
@@ -75,6 +100,7 @@ function ProductCategoryRow({props}) {
       <p className='categoryrow'>{props["category"].toUpperCase()}</p>
       <table>
         <tbody>
+          {tableHeading}
           {items}
         </tbody>
       </table>

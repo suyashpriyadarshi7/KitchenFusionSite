@@ -237,6 +237,6 @@ MENU_BEVERAGES_SNACKS = [
 
   ]
 
-with open("RESTAURANT_MENU.json", "w") as f:
-  json.dump(MENU_BEVERAGES_SNACKS, f, indent=2)
+# with open("RESTAURANT_MENU.json", "w") as f:
+#   json.dump(MENU_BEVERAGES_SNACKS, f, indent=2)
 

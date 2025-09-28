@@ -74,6 +74,11 @@ table {
   width: 100%;
 }
 
+.tableheading {
+  border-bottom: 0.5px solid black;
+  text-align: left;
+}
+
 .description {
   font-size: 8px;
   border-bottom: 1px solid black;
