@@ -6,10 +6,126 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kitchen Fusion</title>
-    <script type="module" crossorigin src="/assets/index-_HkgMaDr.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CHsR6AOX.css">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="shop_details" style="display: none;">{"shop_name":"Kitchen Fusion","shop_type":"Cafeteria","shop_location_link":"https://map.google.com/","shop_address":"Somewhere"}</div>
+    <div id="catalogue_object" style="display: none;">{"south indian cuisine":{"timing":"always","price_sub":"price","prices":["59","63","79","69","75","79","99","99","79","99","99","110","120","130","110","150","119","110","80","100","140"],"items":["Idli Sambar (2 pcs)","Vada Sambar (2 pcs)","Masala Dosa","plain dosa","plain onion dosa","plain butter dosa","masala onion dosa","butter masala dosa","plain poddi dosa","onion uttapam","tomato uttapam","onion tomato uttapam","mix veg uttapam","paneer masala dosa","poddi masala dosa","kitchen fusion spl. dosa","mysore masala dosa","plain cheese dosa","fried idli","chilly idli","masala cheese dosa"],"avl":["t","t","t","t","t","t","t","t","t","t","t","t","t","t","t","t","t","t","t","t","t"],"type":["v","v","v","v","v","v","v","v","v","v","v","v","v","v","v","v","v","v","v","v","v"],"desc":["","","","","","","","","","","","","","","","","","","","",""]},"garlic breads (3pcs)":{"timing":"always","price_sub":"price","prices":["59","79","89","89","99","99","89"],"items":["Garlic Bread","cheese garlic bread","cheese chilly garlic bread","tandoori cheese garlic bread","chicken cheese garlic bread","chicken tikka garlic bread","chicken garlic bread"],"avl":["t","t","t","t","t","t","t"],"type":["v","v","v","v","n","n","n"],"desc":["","","","","","",""]},"burgers":{"timing":"always","price_sub":"price","prices":["49","70","80","99","115","115","120"],"items":["Aaloo Tikki Burger","Veg Tikki Burger + Fries","Cheese Veg Burger + Fries","Paneer Tikka Burger + Fries","Cripsy Chicken Burger + Fries","Grilled Chicken Burger + Fries","Tandoori Chicken Burger + Fries"],"avl":["t","t","t","t","t","t","t"],"type":["v","v","v","v","n","n","n"],"desc":["","","","","","",""]},"pasta":{"timing":"always","price_sub":"price","prices":["129","150","129","150","139","170","149","179","169","210"],"items":["pasta in alfredo sauce white sauce","Chicken pasta in alfredo sauce white sauce","Pasta in arabbiata sauce red sauce","Chicken Pasta in arabbiata sauce red sauce","Pasta in mix sauce","Chicken pasta in mix sauce","Mamma's secret pasta","Mamma's secret chicken pasta","Spaghetti Aglio E Olio","Spaghetti with chicken aglio e olio"],"avl":["t","t","t","t","t","t","t","t","t","t"],"type":["v","n","v","n","v","n","v","n","v","n"],"desc":["","","","","","","","","",""]},"maggi":{"timing":"always","price_sub":"price","prices":["60","80","90","110","110","120","130"],"items":["plain maggi","masala maggi","vegetable maggi","masala cheese maggi","chicken maggi","chicken masala maggi","cheese chicken maggi"],"avl":["t","t","t","t","t","t","t"],"type":["v","v","v","v","n","n","n"],"desc":["","","","","","",""]},"nuggets":{"timing":"always","price_sub":"price","prices":["59","59","100","110"],"items":["Veg nugget","cheese balls nugget","chicken nuggets","chicken fingers"],"avl":["t","t","t","t"],"type":["v","v","n","n"],"desc":["","","",""]},"fries":{"timing":"always","price_sub":"price","prices":["69","99","79","89"],"items":["french fries","cheese & jalapenos fries","peri peri french fries","cheesy fries"],"avl":["t","t","t","t"],"type":["v","v","v","v"],"desc":["","","",""]},"sandwiches (non-veg grilled)":{"timing":"always","price_sub":"price","prices":["125","125","125","125"],"items":["classic chicken grilled","egg and mayo grilled","chicken and mayo grilled","chicken tikka grilled"],"avl":["t","t","t","t"],"type":["n","n","n","n"],"desc":["","","",""]}}</div>
+
+    <div id="menu" style="padding: 4px;"></div>
+    
+
+    <script>
+
+      function toTitleCase(str) {
+        return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+      }
+
+      document.addEventListener('DOMContentLoaded', (event) => {
+        let shop_details = JSON.parse(document.querySelector('#shop_details').textContent);
+        let catalogue_object = JSON.parse(document.querySelector('#catalogue_object').textContent);
+
+        // create headbar
+
+        let headbar = document.createElement('div');
+        headbar.classList.add('headbar');
+        headbar.innerHTML = `
+          <h1>${shop_details.shop_name}</h1>
+          <h3 style="color: black;">${shop_details.shop_type}</h3>
+        
+        `;
+
+        menu.append(headbar);
+
+        let pagetitle = document.createElement('div');
+        pagetitle.classList.add('pagetitle');
+        pagetitle.textContent = "MENU";
+
+        menu.append(pagetitle);
+
+        Object.keys(catalogue_object).forEach(element => {
+          let p = document.createElement('p');
+          p.classList.add('categoryrow');
+          p.textContent = element.toUpperCase()
+          menu.append(p);
+
+          let table = document.createElement('table');
+          let thead = document.createElement('thead');
+          let tbody = document.createElement('tbody');
+
+
+          if (typeof catalogue_object[element]['price_sub'] === 'string') {
+
+            
+            // setting the table headers in thead
+            thead.innerHTML = `<tr><th class='tableheading'>Items</th><th class='tableheading'>Price</th></tr>`;
+
+            // setting the items and price in tbody
+            let num = catalogue_object[element]['items'].length
+            for (let i=0; i<num; i++){
+            
+              let tr = document.createElement('tr');
+              let color = catalogue_object[element]['type'][i] == "n" ? 'red' : 'green';
+              tr.innerHTML = `<td class="item-name" style="color: ${color}">${toTitleCase(catalogue_object[element]['items'][i])}</td><td>&#8377; ${catalogue_object[element]['prices'][i]}</td>`;
+              tbody.append(tr);
+            }  
+
+
+          }
+          else if (typeof catalogue_object[element]['price_sub'] === 'object') {
+
+            // setting the table header
+            let subcategories = catalogue_object[element]['price_sub'];
+            thead.innerHTML = `
+              <tr><th class='tableheading' rowspan='2'>Items</th><th class='tableheading' colspan=${subcategories.length} style="text-align: center;">Price</th></tr>
+            `;
+
+            // setting the table price subcategory header
+            let tr = document.createElement('tr')
+            subcategories.forEach(elem=>{
+              let th = document.createElement('th');
+              th.classList.add('tableheading');
+              th.textContent = toTitleCase(elem);
+              tr.append(th);
+            })
+            thead.append(tr);
+
+            // setting the items and price in body with price subcategory.
+            let num = catalogue_object[element]['items'].length
+            for (let i=0; i<num; i++) {
+
+              let tr = document.createElement('tr');
+              let color = catalogue_object[element]['type'][i] == "n" ? 'red' : 'green';
+              tr.innerHTML = `<td class="item-name" style="color: ${color}">${toTitleCase(catalogue_object[element]['items'][i])}</td>`;
+              
+              let pricesubcategories = catalogue_object[element]['prices'][i];
+              
+              pricesubcategories.forEach(sub => {
+                
+                let td = document.createElement('td');
+                td.innerHTML = `&#8377; ${sub}`;
+                tr.append(td);
+              })
+
+              tbody.append(tr);
+            };
+            
+          }
+          else {}
+
+          
+          let tfoot = document.createElement('tfoot');
+
+
+          table.append(thead, tbody, tfoot);
+          menu.append(table);
+        });
+
+
+
+
+
+
+      })
   </body>
 </html>
